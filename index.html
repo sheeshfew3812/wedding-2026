@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Георгий &amp; Алиса</title>
+  <meta name="description" content="11 декабря 2026 — Георгий и Алиса приглашают вас разделить радость нашего дня. Подтвердите присутствие до 1 ноября.">
+  <meta name="theme-color" content="#2D2469">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Георгий &amp; Алиса — 11.12.2026">
+  <meta property="og:description" content="Приглашаем вас на нашу свадьбу!">
+  <meta property="og:image" content="og-cover.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%92%8D%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            plum:      { DEFAULT: '#2D2469', 50: '#f2f0fb', 100: '#e3def6', 800: '#231c54', 900: '#1b1542' },
+            dustyBlue: { DEFAULT: '#739AC7', 100: '#e9f0f8', 200: '#d3e1f1', 700: '#5277a3' },
+            milk:      { DEFAULT: '#FFFFF0', card: '#FCFCF5' },
+            olive:     { DEFAULT: '#8E9C64', 100: '#f1f4e9', 800: '#5a643d' },
+            gold:      { DEFAULT: '#CEA277', light: '#E5C9AC', dark: '#A77B52' },
+            sandBg:    { DEFAULT: '#F5EBDD' }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans:  ['"Montserrat"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html, body {
+      touch-action: pan-x pan-y;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    /* Важно: clip, а не hidden — hidden ломает position: sticky у полароидов */
+    body {
+      background-color: #FFFFF0;
+      color: #2D2469;
+      overflow-x: clip;
+    }
+
+    .font-serif-italic { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+    section[id] { scroll-margin-top: 80px; }
+
+    /* ============ ЦВЕТОЧНАЯ ПОЛОСКА — ОТ КРАЯ ДО КРАЯ ============ */
+    .flower-bar {
+      display: block;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 1400px;
+      height: auto;
+      margin-bottom: 0;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* ============ СТОПКА ПОЛАРОИДОВ ============ */
+    .photo-stack { position: relative; min-height: 420vh; }
+
+    .polaroid {
+      position: sticky;
+      top: 15vh;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 400px;
+      aspect-ratio: 4 / 5;
+      background: #fff;
+      padding: 14px;
+      border-radius: 4px;
+      box-shadow:
+        0 2px 4px rgba(45, 36, 105, 0.08),
+        0 12px 28px rgba(45, 36, 105, 0.18),
+        0 30px 60px rgba(45, 36, 105, 0.12);
+      transition: transform 0.6s ease;
+      z-index: 1;
+    }
+
+    .polaroid .photo {
+      width: 100%; height: 100%;
+      border-radius: 2px; overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(206,162,119,0.25) 0%, rgba(45,36,105,0.15) 100%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.5) 0 12px, rgba(255,255,255,0.2) 12px 24px);
+    }
+    .polaroid .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .polaroid:nth-child(1) { transform: rotate(-4deg); z-index: 1; }
+    .polaroid:nth-child(2) { transform: rotate( 3deg); z-index: 2; }
+    .polaroid:nth-child(3) { transform: rotate(-2deg); z-index: 3; }
+    .polaroid:nth-child(4) { transform: rotate( 5deg); z-index: 4; }
+    .polaroid:nth-child(5) { transform: rotate(-3deg); z-index: 5; }
+    .polaroid + .polaroid { margin-top: 40vh; }
+
+    /* ============ ПРОЧЕЕ ============ */
+    .glass-card {
+      background: rgba(255, 255, 240, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(206, 162, 119, 0.25);
+    }
+
+    .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hp-field { position: absolute !important; left: -9999px !important; opacity: 0; pointer-events: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-in-up { animation: none; }
+      .polaroid { transition: none; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+
+    @media (max-width: 640px) {
+      .polaroid { top: 12vh; max-width: 320px; padding: 10px; }
+      .polaroid + .polaroid { margin-top: 35vh; }
+      .photo-stack { min-height: 380vh; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-gold selection:text-white">
+
+  <!-- ================= HEADER ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-milk/90 backdrop-blur-md border-b border-gold/20">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#top" class="font-serif text-2xl font-bold tracking-wider text-plum">
+        Г <span class="text-gold">&amp;</span> А
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-medium text-plum/80" aria-label="Основная навигация">
+        <a href="#about"     class="hover:text-gold transition">Приветствие</a>
+        <a href="#gallery"   class="hover:text-gold transition">Фото</a>
+        <a href="#timing"    class="hover:text-gold transition">Программа</a>
+        <a href="#dresscode" class="hover:text-gold transition">Дресс-код</a>
+        <a href="#rsvp"      class="px-5 py-2 rounded-full bg-plum text-milk hover:bg-gold transition shadow-md">RSVP</a>
+      </nav>
+
+      <button id="menuBtn" type="button"
+              class="md:hidden text-plum focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg p-2"
+              aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false">
+        <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden bg-milk border-b border-gold/20 px-6 py-4 shadow-lg text-center text-sm uppercase tracking-widest space-y-3">
+      <a href="#about"     class="block py-1 text-plum hover:text-gold mobile-link">Приветствие</a>
+      <a href="#gallery"   class="block py-1 text-plum hover:text-gold mobile-link">Фото</a>
+      <a href="#timing"    class="block py-1 text-plum hover:text-gold mobile-link">Программа</a>
+      <a href="#dresscode" class="block py-1 text-plum hover:text-gold mobile-link">Дресс-код</a>
+      <a href="#rsvp"      class="block py-2 mt-2 rounded-full bg-plum text-milk mobile-link">Подтвердить присутствие</a>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="top" class="min-h-screen flex items-start sm:items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 px-4 text-center relative overflow-hidden bg-gradient-to-b from-milk via-milk to-dustyBlue/10">
+    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full border border-gold/20 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full border border-gold/20 pointer-events-none" aria-hidden="true"></div>
+
+    <div class="max-w-3xl mx-auto space-y-5 sm:space-y-7 z-10 fade-in-up relative">
+
+      <!-- Цветочная полоска над заголовком -->
+      <img src="flowbar-1.png"
+           alt=""
+           aria-hidden="true"
+           draggable="false"
+           class="flower-bar">
+
+      <p class="font-serif-italic text-xl sm:text-2xl md:text-3xl text-gold-dark tracking-wide">
+        «Да мы только распишемся…»
+      </p>
+
+      <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-normal text-plum tracking-tight leading-none">
+        Георгий <br class="sm:hidden">
+        <span class="font-serif-italic text-gold font-light">&amp;</span>
+        Алиса
+      </h1>
+
+      <div class="w-24 h-0.5 bg-gold mx-auto my-2 sm:my-4" aria-hidden="true"></div>
+
+      <p class="text-sm sm:text-base md:text-xl text-plum/80 font-light tracking-widest uppercase">
+        <time datetime="2026-12-11">11 декабря 2026</time>
+      </p>
+
+      <div>
+        <p class="text-[10px] sm:text-xs uppercase tracking-widest text-plum/60 mb-2 sm:mb-4 font-medium" id="countdownLabel">
+          До торжественной минуты осталось:
+        </p>
+        <div id="countdown" class="grid grid-cols-4 gap-1.5 sm:gap-3 max-w-xs sm:max-w-sm mx-auto" role="timer" aria-live="polite" aria-labelledby="countdownLabel">
+          <div class="glass-card rounded-xl sm:rounded-2xl p-1.5 sm:p-3 text-center shadow-sm">
+            <span id="days"    class="block font-serif text-lg sm:text-3xl text-plum font-bold">00</span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-plum/70">Дней</span>
+          </div>
+          <div class="glass-card rounded-xl sm:rounded-2xl p-1.5 sm:p-3 text-center shadow-sm">
+            <span id="hours"   class="block font-serif text-lg sm:text-3xl text-plum font-bold">00</span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-plum/70">Часов</span>
+          </div>
+          <div class="glass-card rounded-xl sm:rounded-2xl p-1.5 sm:p-3 text-center shadow-sm">
+            <span id="minutes" class="block font-serif text-lg sm:text-3xl text-plum font-bold">00</span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-plum/70">Минут</span>
+          </div>
+          <div class="glass-card rounded-xl sm:rounded-2xl p-1.5 sm:p-3 text-center shadow-sm">
+            <span id="seconds" class="block font-serif text-lg sm:text-3xl text-plum font-bold">00</span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-plum/70">Секунд</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a href="#about" class="inline-flex items-center space-x-2 sm:space-x-3 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-plum hover:bg-gold text-milk text-[11px] sm:text-xs md:text-sm font-medium uppercase tracking-widest transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <span>Подтвердить присутствие</span>
+          <i class="fa-solid fa-arrow-down text-[10px] sm:text-xs text-gold" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= БЛОК 1: ПРИВЕТСТВИЕ ================= -->
+  <section id="about" class="py-20 px-4 bg-white border-y border-gold/10">
+    <div class="max-w-2xl mx-auto text-center space-y-6">
+      <div class="w-12 h-12 mx-auto rounded-full bg-plum/5 flex items-center justify-center text-gold" aria-hidden="true">
+        <i class="fa-solid fa-heart text-lg"></i>
+      </div>
+      <h2 class="font-serif text-3xl sm:text-4xl text-plum">Дорогие родные и близкие!</h2>
+      <div class="w-16 h-0.5 bg-gold mx-auto" aria-hidden="true"></div>
+      <p class="text-plum/80 leading-relaxed text-base sm:text-lg font-light">
+        В нашей жизни происходит важное и счастливое событие — мы создаём семью!
+      </p>
+      <p class="text-plum/80 leading-relaxed text-base sm:text-lg font-light">
+        Мы будем очень рады, если вы разделите с нами радость этого дня.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ФОТО-ПОЛАРОИДЫ ================= -->
+  <section id="gallery" class="bg-milk pt-20">
+    <div class="text-center space-y-3 px-4">
+      <span class="text-xs uppercase tracking-widest text-gold-dark font-semibold">Наша история</span>
+      <h2 class="font-serif text-3xl sm:text-5xl text-plum">Наши моменты</h2>
+      <div class="w-16 h-0.5 bg-gold mx-auto" aria-hidden="true"></div>
+      <p class="text-plum/60 text-sm font-light pt-4 max-w-md mx-auto">
+        ↓ листайте вниз — фотографии будут появляться одна за другой
+      </p>
+    </div>
+
+    <div class="photo-stack px-4 mt-16">
+      <div class="polaroid"><div class="photo"><img src="pol-1.webp" alt="Наше фото 1" loading="lazy"></div></div>
+      <div class="polaroid"><div class="photo"><img src="pol-2.webp" alt="Наше фото 2" loading="lazy"></div></div>
+      <div class="polaroid"><div class="photo"><img src="pol-3.webp" alt="Наше фото 3" loading="lazy"></div></div>
+      <div class="polaroid"><div class="photo"><img src="pol-4.webp" alt="Наше фото 4" loading="lazy"></div></div>
+      <div class="polaroid"><div class="photo"><img src="pol-5.webp" alt="Наше фото 5" loading="lazy"></div></div>
+    </div>
+
+    <div class="h-40"></div>
+  </section>
+
+  <!-- ================= БЛОК 2: ПРОГРАММА ================= -->
+  <section id="timing" class="py-20 px-4 bg-white border-y border-gold/10">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center space-y-3 mb-16">
+        <span class="text-xs uppercase tracking-widest text-gold-dark font-semibold">План дня • 11.12.2026</span>
+        <h2 class="font-serif text-3xl sm:text-5xl text-plum">Программа торжества</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto" aria-hidden="true"></div>
+      </div>
+
+      <ol class="relative border-l-2 border-gold/30 ml-4 sm:ml-32 space-y-10 list-none p-0">
+        <li class="relative pl-8 sm:pl-12">
+          <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-plum text-gold flex items-center justify-center shadow-md text-xs" aria-hidden="true"><i class="fa-solid fa-ring"></i></div>
+          <div class="sm:absolute sm:-left-32 sm:top-1 sm:text-right sm:w-24 mb-1 sm:mb-0">
+            <time datetime="2026-12-11T12:45+03:00" class="font-serif text-xl sm:text-2xl font-bold text-plum">12:45</time>
+          </div>
+          <div class="bg-milk p-6 rounded-2xl shadow-sm border border-gold/20">
+            <h3 class="font-serif text-xl font-semibold text-plum">Торжественная регистрация</h3>
+            <p class="text-sm text-plum/70 mt-1">Мы будем рады видеть вас на официальной церемонии.</p>
+            <div class="mt-3 pt-3 border-t border-gold/15 text-xs text-plum/80 flex flex-wrap items-center justify-between gap-2">
+              <span><i class="fa-solid fa-location-dot text-gold mr-1" aria-hidden="true"></i> г. Москва, ул. Дубравная, д. 48А (ЗАГС)</span>
+              <div class="flex space-x-2">
+                <button type="button" data-copy="г. Москва, ул. Дубравная, д. 48А" class="px-2.5 py-1 rounded bg-plum/5 hover:bg-gold/20 text-plum transition text-[11px]">
+                  <i class="fa-regular fa-copy mr-1" aria-hidden="true"></i> Копировать
+                </button>
+                <a href="https://yandex.ru/maps/?text=г.Москва,ул.Дубравная,д.48А" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-dustyBlue/20 hover:bg-dustyBlue/30 text-plum transition text-[11px]">
+                  Карта <i class="fa-solid fa-arrow-up-right-from-square text-[9px]" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="relative pl-8 sm:pl-12">
+          <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-plum text-gold flex items-center justify-center shadow-md text-xs" aria-hidden="true"><i class="fa-solid fa-champagne-glasses"></i></div>
+          <div class="sm:absolute sm:-left-32 sm:top-1 sm:text-right sm:w-24 mb-1 sm:mb-0">
+            <time datetime="2026-12-11T14:30+03:00" class="font-serif text-xl sm:text-2xl font-bold text-plum">14:30</time>
+          </div>
+          <div class="bg-milk p-6 rounded-2xl shadow-sm border border-gold/20">
+            <h3 class="font-serif text-xl font-semibold text-plum">Сбор гостей &amp; фуршет</h3>
+            <p class="text-sm text-plum/70 mt-1">Встречаемся в ресторане! Вас ждут угощения, напитки и приятное общение перед началом вечера.</p>
+            <div class="mt-3 pt-3 border-t border-gold/15 text-xs text-plum/80 flex flex-wrap items-center justify-between gap-2">
+              <span><i class="fa-solid fa-location-dot text-gold mr-1" aria-hidden="true"></i> Ресторан «Белый» (г. Москва, ул. Арбат, д. 55/32)</span>
+              <div class="flex space-x-2">
+                <button type="button" data-copy="г. Москва, ул. Арбат, д. 55/32, ресторан Белый" class="px-2.5 py-1 rounded bg-plum/5 hover:bg-gold/20 text-plum transition text-[11px]">
+                  <i class="fa-regular fa-copy mr-1" aria-hidden="true"></i> Копировать
+                </button>
+                <a href="https://yandex.ru/maps/?text=г.Москва,ул.Арбат,д.55/32" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-dustyBlue/20 hover:bg-dustyBlue/30 text-plum transition text-[11px]">
+                  Карта <i class="fa-solid fa-arrow-up-right-from-square text-[9px]" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="relative pl-8 sm:pl-12">
+          <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-plum text-gold flex items-center justify-center shadow-md text-xs" aria-hidden="true"><i class="fa-solid fa-utensils"></i></div>
+          <div class="sm:absolute sm:-left-32 sm:top-1 sm:text-right sm:w-24 mb-1 sm:mb-0">
+            <time datetime="2026-12-11T15:30+03:00" class="font-serif text-xl sm:text-2xl font-bold text-plum">15:30</time>
+          </div>
+          <div class="bg-milk p-6 rounded-2xl shadow-sm border border-gold/20">
+            <h3 class="font-serif text-xl font-semibold text-plum">Начало банкета &amp; главное торжество</h3>
+            <p class="text-sm text-plum/70 mt-1">Мы присоединимся к вам, и начнётся основная праздничная программа!</p>
+          </div>
+        </li>
+
+        <li class="relative pl-8 sm:pl-12">
+          <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-plum text-gold flex items-center justify-center shadow-md text-xs" aria-hidden="true"><i class="fa-solid fa-music"></i></div>
+          <div class="sm:absolute sm:-left-32 sm:top-1 sm:text-right sm:w-24 mb-1 sm:mb-0">
+            <time datetime="2026-12-11T22:00+03:00" class="font-serif text-lg sm:text-xl font-bold text-plum">22:00–23:00</time>
+          </div>
+          <div class="bg-milk p-6 rounded-2xl shadow-sm border border-gold/20">
+            <h3 class="font-serif text-xl font-semibold text-plum">Танцевальный сет &amp; свободное время</h3>
+            <p class="text-sm text-plum/70 mt-1">Время для танцев, общения и ярких эмоций.</p>
+          </div>
+        </li>
+
+        <li class="relative pl-8 sm:pl-12">
+          <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-plum text-gold flex items-center justify-center shadow-md text-xs" aria-hidden="true"><i class="fa-solid fa-moon"></i></div>
+          <div class="sm:absolute sm:-left-32 sm:top-1 sm:text-right sm:w-24 mb-1 sm:mb-0">
+            <time datetime="2026-12-11T23:00+03:00" class="font-serif text-xl sm:text-2xl font-bold text-plum">23:00</time>
+          </div>
+          <div class="bg-milk p-6 rounded-2xl shadow-sm border border-gold/20">
+            <h3 class="font-serif text-xl font-semibold text-plum">Завершение вечера</h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= БЛОК 3: ДРЕСС-КОД ================= -->
+  <section id="dresscode" class="py-20 px-4 bg-sandBg border-y border-gold/10">
+    <div class="max-w-3xl mx-auto text-center space-y-8">
+      <div class="space-y-3">
+        <span class="text-xs uppercase tracking-widest text-gold-dark font-semibold">Пожелания</span>
+        <h2 class="font-serif text-3xl sm:text-5xl text-plum">Дресс-код</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto" aria-hidden="true"></div>
+      </div>
+
+      <p class="text-plum/80 font-light leading-relaxed sm:text-lg">
+        Нам будет очень приятно, если при выборе образов вы придержитесь нашей праздничной палитры. Это поможет создать красивую и гармоничную атмосферу на фотографиях!
+      </p>
+
+      <img src="dress-1.png"
+           alt="Палитра дресс-кода"
+           class="max-w-full sm:max-w-2xl mx-auto drop-shadow-lg select-none"
+           draggable="false">
+    </div>
+  </section>
+
+  <!-- ================= БЛОК 4: RSVP ================= -->
+  <section id="rsvp" class="py-20 px-4 bg-milk">
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gold/30">
+        <div class="text-center space-y-3 mb-8">
+          <span class="text-xs uppercase tracking-widest text-gold-dark font-semibold">Анкета гостя</span>
+          <h2 class="font-serif text-3xl sm:text-4xl text-plum">Подтверждение присутствия</h2>
+          <p class="text-sm text-plum/60 font-light">
+            Пожалуйста, подтвердите своё присутствие до <strong>1 ноября 2026 года</strong>
+          </p>
+          <div class="w-16 h-0.5 bg-gold mx-auto" aria-hidden="true"></div>
+        </div>
+
+        <form id="rsvpForm" class="space-y-6" novalidate>
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Не заполняйте это поле</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div>
+            <label for="guest_name" class="block text-xs uppercase tracking-wider text-plum font-semibold mb-2">
+              1. Ваше имя и фамилия *
+            </label>
+            <input id="guest_name" name="guest_name" type="text" required autocomplete="name"
+                   placeholder="Например: Иван и Анна Ивановы"
+                   class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold text-sm transition">
+          </div>
+
+          <fieldset>
+            <legend class="block text-xs uppercase tracking-wider text-plum font-semibold mb-2">
+              2. Сможете ли вы быть с нами в этот день? *
+            </legend>
+            <div class="space-y-2">
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="radio" name="attendance" value="Да, с удовольствием!" checked class="text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Да, с удовольствием!</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="radio" name="attendance" value="К сожалению, не смогу" class="text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">К сожалению, не смогу</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="block text-xs uppercase tracking-wider text-plum font-semibold mb-2">
+              3. Ваши предпочтения по напиткам
+            </legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Белое вино" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Белое вино</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Красное вино" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Красное вино</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Игристое" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Игристое</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Водка" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Водка</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Коньяк" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Коньяк</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk transition">
+                <input type="checkbox" name="drinks" value="Виски" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Виски</span>
+              </label>
+              <label class="flex items-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:bg-milk sm:col-span-2 transition">
+                <input type="checkbox" name="drinks" value="Безалкогольные напитки" class="rounded text-plum focus:ring-gold">
+                <span class="ml-3 text-sm text-plum">Безалкогольные напитки</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="diet" class="block text-xs uppercase tracking-wider text-plum font-semibold mb-2">
+              4. Ограничения по питанию / аллергии
+            </label>
+            <input id="diet" name="diet" type="text"
+                   placeholder="Например: Не ем мясо, аллергия на орехи..."
+                   class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold text-sm transition">
+          </div>
+
+          <button type="submit" id="submitBtn"
+                  class="w-full py-4 rounded-xl bg-plum hover:bg-gold text-milk font-semibold uppercase tracking-widest text-xs sm:text-sm transition shadow-lg disabled:opacity-60 disabled:cursor-wait">
+            Отправить ответ
+          </button>
+
+          <p id="formStatus" class="text-xs text-center text-plum/60 hidden" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-12 bg-plum text-milk text-center space-y-4">
+    <p class="font-serif text-3xl font-bold">Георгий <span class="text-gold">&amp;</span> Алиса</p>
+    <p class="text-xs text-milk/60 uppercase tracking-widest">До скорой встречи 11 декабря 2026 года!</p>
+  </footer>
+
+  <!-- ================= МОДАЛКА ================= -->
+  <div id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle"
+       class="fixed inset-0 bg-plum/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center space-y-6 shadow-2xl border border-gold/40">
+      <div class="w-16 h-16 rounded-full bg-gold/20 text-gold flex items-center justify-center mx-auto text-2xl" aria-hidden="true">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 id="thankYouTitle" class="font-serif text-3xl font-bold text-plum">Ответ отправлен! ✨</h3>
+      <p class="text-plum/80 text-sm font-light leading-relaxed">
+        Большое спасибо! Мы сохранили ваши ответы. С нетерпением ждём встречи с вами на нашем торжестве!
+      </p>
+      <button type="button" id="closeModalBtn"
+              class="w-full py-3 rounded-xl bg-plum text-milk font-medium text-sm hover:bg-gold transition">
+        Закрыть
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= TOAST ================= -->
+  <div id="toast" role="status" aria-live="polite"
+       class="fixed bottom-5 right-5 bg-plum text-milk px-4 py-3 rounded-xl text-xs shadow-xl hidden border border-gold/40 z-50">
+    <i class="fa-solid fa-check text-gold mr-2" aria-hidden="true"></i> Адрес скопирован в буфер обмена!
+  </div>
+
+  <script>
+    /* 1. COUNTDOWN */
+    const targetDate = new Date("2026-12-11T13:00:00+03:00").getTime();
+    const countdownEl = document.getElementById('countdown');
+    const countdownLabel = document.getElementById('countdownLabel');
+    let countdownInterval = null;
+
+    function updateCountdown() {
+      const diff = targetDate - Date.now();
+      if (diff <= 0) {
+        countdownLabel.textContent = '';
+        countdownEl.classList.remove('grid-cols-4');
+        countdownEl.classList.add('grid-cols-1');
+        countdownEl.innerHTML = '<p class="font-serif text-2xl sm:text-3xl text-gold-dark py-2">Этот день настал ✨</p>';
+        clearInterval(countdownInterval);
+        return;
+      }
+      const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const pad = (n) => String(n).padStart(2, '0');
+      document.getElementById("days").textContent    = pad(days);
+      document.getElementById("hours").textContent   = pad(hours);
+      document.getElementById("minutes").textContent = pad(minutes);
+      document.getElementById("seconds").textContent = pad(seconds);
+    }
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+
+    /* 2. МОБИЛЬНОЕ МЕНЮ */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function setMenu(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      menuBtn.innerHTML = open
+        ? '<i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>';
+    }
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMenu(mobileMenu.classList.contains('hidden'));
+    });
+    mobileLinks.forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('click', (e) => {
+      if (mobileMenu.classList.contains('hidden')) return;
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
+    });
+
+    /* 3. КОПИРОВАНИЕ */
+    const toast = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(text) {
+      toast.innerHTML = '<i class="fa-solid fa-check text-gold mr-2" aria-hidden="true"></i> ' + text;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+    async function copyToClipboard(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const t = document.createElement('textarea');
+          t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select();
+          document.execCommand('copy'); t.remove();
+        }
+        showToast('Адрес скопирован в буфер обмена!');
+      } catch {
+        showToast('Не удалось скопировать.');
+      }
+    }
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-copy]');
+      if (btn) copyToClipboard(btn.dataset.copy);
+    });
+
+    /* 4. МОДАЛКА */
+    const modal = document.getElementById('thankYouModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    let lastFocused = null;
+    const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      const first = modal.querySelector(FOCUSABLE);
+      (first || closeModalBtn).focus();
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key === 'Tab') {
+        const nodes = modal.querySelectorAll(FOCUSABLE);
+        if (!nodes.length) return;
+        const first = nodes[0], last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    /* 5. ОТПРАВКА В GOOGLE ТАБЛИЦУ */
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhzHSpaw3lNFQONthoybQnjDR4912uz93prfyGi5SNXi2fuefvXul0ckF_f9dW1dSO/exec';
+
+    const rsvpForm = document.getElementById('rsvpForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+
+    function setStatus(text, isError = false) {
+      formStatus.textContent = text;
+      formStatus.classList.toggle('text-red-600', isError);
+      formStatus.classList.toggle('text-plum/60', !isError);
+      formStatus.classList.remove('hidden');
+    }
+
+    async function sendToGoogleSheet(data) {
+      if (!GOOGLE_SCRIPT_URL) return false;
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+      return true;
+    }
+
+    rsvpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (rsvpForm.website.value.trim() !== '') return;
+      if (!rsvpForm.guest_name.value.trim()) {
+        setStatus('Пожалуйста, укажите имя и фамилию.', true);
+        rsvpForm.guest_name.focus();
+        return;
+      }
+      const formData = new FormData(rsvpForm);
+      const drinksSelected = Array.from(
+        rsvpForm.querySelectorAll('input[name="drinks"]:checked')
+      ).map(cb => cb.value);
+
+      const responseData = {
+        guest_name: formData.get('guest_name').trim(),
+        attendance: formData.get('attendance'),
+        drinks:     drinksSelected.join(', '),
+        diet:       (formData.get('diet') || '').trim() || 'Нет',
+        timestamp:  new Date().toISOString()
+      };
+
+      try { localStorage.setItem('wedding_rsvp_' + Date.now(), JSON.stringify(responseData)); } catch {}
+
+      submitBtn.disabled = true;
+      const originalLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Отправляем…';
+      formStatus.classList.add('hidden');
+
+      try {
+        await sendToGoogleSheet(responseData);
+        rsvpForm.reset();
+        openModal();
+      } catch (err) {
+        console.error(err);
+        setStatus('Не удалось отправить. Попробуйте ещё раз.', true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    });
+  </script>
+</body>
+</html>
